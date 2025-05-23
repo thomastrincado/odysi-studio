@@ -5,123 +5,423 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odysi Studio – Unlock Your Next Stage of Growth</title>
     <meta name="description" content="Align your growth, product, and AI strategies with Odysi Studio.">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&display=swap" rel="stylesheet">
     <style>
-/* Basic Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 html {
-    scroll-behavior: smooth; /* For smooth scrolling */
+    scroll-behavior: smooth;
 }
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Figtree', sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
     line-height: 1.6;
-    color: #333;
-    background-color: #fff;
-    margin: 0; /* Ensure no default body margin */
-    padding: 0; /* Ensure no default body padding */
 }
 
-/* Header and Navigation */
+/* Header Styling */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    background-color: #fff; /* Or a slightly transparent white like rgba(255, 255, 255, 0.95) */
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px 0;
+    transition: padding 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+    box-shadow: 0 0 0 rgba(0,0,0,0); /* Initial state for shadow */
 }
 
-header nav ul {
+header.scrolled {
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Shadow for scrolled state */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0a0a23; /* Using a darker color for contrast, similar to problem description */
+    text-decoration: none;
+}
+
+nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 0; /* Remove default ul padding */
+    align-items: center; /* Vertically align items */
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
 }
 
-header nav ul li {
-    margin: 0 15px;
+nav ul li {
+    margin-left: 25px;
 }
 
-header nav ul li a {
-    color: #fff;
+nav ul li:first-child {
+    margin-left: 0; /* No margin for the first item if logo is separate */
+}
+
+nav ul li a {
     text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    color: #1a1a1a;
+    font-weight: 500; /* Adjusted from problem for Figtree */
+    transition: color 0.3s ease;
+    padding: 5px 0; /* Add some padding for easier clicking */
 }
 
-header nav ul li a:hover,
-header nav ul li a.active { /* 'active' class can be added by JS later */
-    background-color: #555;
+nav ul li a:hover,
+nav ul li a.active-link { /* Class for active link highlighting via JS if needed */
+    color: #007bff; /* Accent color */
 }
 
-/* Main Content & Sections */
+/* Nav Toggle (Hamburger) */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px; /* Easier to tap */
+    z-index: 1001; /* Ensure hamburger is above nav ul on mobile */
+}
+
+.hamburger {
+    display: block;
+    position: relative;
+    width: 24px; /* Hamburger icon width */
+    height: 2px; /* Hamburger icon line height */
+    background-color: #1a1a1a;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before {
+    top: -7px; /* Space between lines */
+}
+
+.hamburger::after {
+    bottom: -7px; /* Space between lines */
+}
+
+/* Hamburger animation for active state (optional, for X icon) */
+.nav-toggle.active .hamburger {
+    background-color: transparent; /* Middle line disappears */
+}
+
+.nav-toggle.active .hamburger::before {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.active .hamburger::after {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* Mobile Navigation (Media Query) */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.6rem; /* Slightly smaller logo for mobile */
+    }
+
+    nav ul {
+        display: none; /* Hidden by default on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 0; /* Align with top of header */
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Full height for overlay effect */
+        background-color: rgba(255, 255, 255, 0.98); /* Slightly transparent white */
+        /* padding-top: 70px; */ /* Original - this padding is for content within the nav, not the nav itself */
+        padding-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Drop shadow for the menu */
+        z-index: 1000; /* Ensure menu is above content but below active hamburger */
+        overflow-y: auto; /* Allow scrolling if menu items exceed screen height */
+        justify-content: center; /* Better vertical alignment for items if not scrolling */
+    }
+    nav ul.active {
+        display: flex; /* Show the menu */
+    }
+
+    nav ul li {
+        margin: 20px 0; /* Vertical spacing for mobile menu items */
+        text-align: center;
+    }
+    
+    nav ul li:first-child {
+       margin-top: 20px; /* Add some space at the top of the mobile menu */
+    }
+    
+    nav ul li a {
+        font-size: 1.2rem; /* Larger font for mobile nav links */
+    }
+
+    .nav-toggle {
+        display: block; /* Show hamburger on mobile */
+    }
+}
+
+/* Adjust main content padding for fixed header */
 main {
-    padding-top: 70px; /* Adjust based on header height */
-    width: 100%; /* Ensure main takes full width */
+    padding-top: 80px; /* Initial padding-top, should be slightly more than header height */
+    transition: padding-top 0.3s ease-in-out;
 }
 
+/* General Section Styling */
 section {
-    padding: 60px 20px; /* Increased padding */
-    min-height: 90vh; 
-    border-bottom: 1px solid #eee;
-    max-width: 1200px; /* Max width for content */
-    margin: 0 auto; /* Center content */
+    padding: 60px 20px;
+    /* min-height will be handled by content or specific section needs, remove if previously set globally */
+    /* border-bottom: 1px solid #eee; */ /* This was in old section styling, removing as per new design focus */
+    /* max-width: 1100px; */ /* This will be handled by section-container */
+    /* margin: 0 auto; */ /* This will be handled by section-container */
+}
+.section-container { /* This class will be added to a div inside each section */
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-section:last-child {
-    border-bottom: none;
+/* Specific Section Backgrounds for Alternating Effect */
+#hero-section { background-color: #f0f0f0; } /* Assuming hero has a distinct light grey, or can be changed */
+#what-we-do-section { background-color: #ffffff; }
+#services { background-color: #f9f9f9; }
+#experience-section { background-color: #ffffff; }
+#team { background-color: #f9f9f9; }
+#contact { background-color: #ffffff; }
+
+/* Divider Label Styling */
+.section-divider-with-label {
+    text-align: center;
+    margin: 40px 0; /* Adjust margin as needed */
+}
+.section-divider-with-label span {
+    display: inline-block;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 0.8rem; /* Small text */
+    letter-spacing: 1px;
+    color: #555; /* Adjust color as needed */
+    padding: 0 15px; /* Space between text and lines */
+}
+.section-divider-with-label span::before,
+.section-divider-with-label span::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 80px; /* Length of the lines */
+    height: 1px; /* Thickness of the lines */
+    background-color: #ccc; /* Line color */
+}
+.section-divider-with-label span::before {
+    left: 100%;
+    margin-left: 15px; /* Space between text and line */
+}
+.section-divider-with-label span::after {
+    right: 100%;
+    margin-right: 15px; /* Space between text and line */
+}
+
+/* Hero section specific styling (adjusting existing one) */
+#hero-section {
+    /* background-color: #f0f0f0; was set previously, confirm or update if needed */
+    /* min-height: calc(100vh - 80px); was set previously, adjust if header height changed */
+    display: flex; /* To vertically center content in the viewport height */
+    align-items: center;
+    padding-top: 60px; /* Retain padding */
+    padding-bottom: 60px; /* Retain padding */
+    min-height: calc(100vh - 80px); /* Retain min-height if header is ~80px */
+}
+.hero-container { /* Extends .section-container */
+    display: flex;
+    align-items: center; /* Vertically align items in the flex container */
+    justify-content: space-between; /* Space between text and image columns */
+    width: 100%; /* Ensure it uses the full width of .section-container */
+}
+.hero-text {
+    flex: 1; /* Takes up available space */
+    padding-right: 40px; /* Space between text and image */
+    max-width: 50%; /* Or adjust as per design */
+    text-align: left; /* Align text to the left in its column */
+}
+.hero-text h1 {
+    font-size: 3.5rem; /* Adjust as per Figtree font and design */
+    line-height: 1.1;
+    font-weight: 700; /* Example weight */
+    margin-bottom: 20px;
+}
+.hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+.hero-image-rotator {
+    flex: 1; /* Takes up available space */
+    max-width: 45%; /* Or adjust as per design */
+    height: 300px; /* Example height, adjust as needed */
+    position: relative; /* For absolute positioning of images if needed for transitions */
+    border-radius: 8px; /* Optional: if you want rounded corners for the rotator area */
+    overflow: hidden; /* If images are larger than container or for certain effects */
+}
+.rotating-image {
+    width: 100%;
+    height: 100%;
+    position: absolute; /* Stack images on top of each other */
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* For fade effect */
+    border-radius: 8px; /* Match parent if using */
+    display:flex; align-items:center; justify-content:center; /* Moved from inline to CSS */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+.rotating-image.active {
+    opacity: 1;
+    z-index: 1; /* Ensure active image is on top */
+}
+
+
+/* General Section Styling is now above, this section:last-child might be redundant or kept for specific cases */
+section:last-child { 
+    border-bottom: none; /* Kept, but general border-bottom on section is removed */
 }
 
 /* General Heading Styling */
 h1, h2, h3 {
     margin-bottom: 20px;
-    color: #333;
+    color: #1a1a1a; /* Updated to new base color */
     line-height: 1.3;
+    font-weight: 600; /* Example weight for Figtree */
 }
-
-h1 {
-    font-size: 2.8rem;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 40px; /* More space below section titles */
-    font-size: 2.5rem;
-}
-
-h3 {
-    margin-top: 25px;
-    margin-bottom: 15px;
-    font-size: 1.8rem;
-    color: #444;
-}
+h1 { font-size: 2.8rem; }
+h2 { text-align: center; margin-bottom: 40px; font-size: 2.5rem; font-weight: 600;}
+h3 { margin-top: 25px; margin-bottom: 15px; font-size: 1.8rem; color: #333333; font-weight: 500;}
 
 /* Paragraph and List Styling */
-p {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    color: #555;
+p { margin-bottom: 15px; font-size: 1rem; color: #333333; font-weight: 400;} /* Example weight */
+ul { margin-bottom: 15px; padding-left: 20px; } /* Default ul, nav ul is styled separately */
+nav ul { padding-left: 0; } /* Ensure nav ul specifically has no padding */
+ul li { margin-bottom: 8px; }
+
+/* "What We Do" Section Specifics: */
+#what-we-do-section h2 {
+    /* General section h2 styles should apply; add specific overrides if needed */
+}
+#what-we-do-section p {
+    margin-bottom: 15px; /* Adjust spacing for paragraphs */
+    max-width: 800px; /* Constrain paragraph width for readability if needed */
+    margin-left: auto; /* Center if max-width is used */
+    margin-right: auto; /* Center if max-width is used */
+    text-align: center; /* Assuming intro paragraphs are centered */
+}
+#what-we-do-section h3 {
+    text-align: center; /* Center "Common challenges:" heading */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 1.6rem; /* Adjust size */
+}
+.challenges-list {
+    list-style: none;
+    padding: 0;
+    max-width: 700px; /* Max width for the list */
+    margin: 0 auto; /* Center the list */
+}
+.challenges-list li {
+    display: flex;
+    align-items: center; /* Align icon with text */
+    margin-bottom: 15px; /* Space between list items */
+    padding: 10px;
+    background-color: #f9f9f9; /* Slight background for each item, if desired, or keep it transparent */
+    border-radius: 6px;
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */ /* Optional subtle shadow */
+}
+.challenge-icon-placeholder {
+    width: 60px; /* Max-width 100px, but start smaller for balance */
+    height: 60px; /* 1:1 Aspect ratio */
+    background-color: #ccc; /* Placeholder color */
+    border-radius: 4px; /* Slightly rounded corners for the placeholder */
+    margin-right: 20px; /* Space between icon and text */
+    flex-shrink: 0; /* Prevent icon from shrinking if text is long */
+    /* max-width: 100px; This is a constraint, actual size set by width/height */
+}
+.challenges-list li span {
+   flex-grow: 1;
 }
 
-ul {
-    margin-bottom: 15px;
-    padding-left: 20px; /* Indent list items */
+/* "What We Offer" / Services Section Specifics: */
+#services h2 {
+    /* General section h2 styles apply */
+    margin-bottom: 40px; /* More space before blocks */
 }
 
-ul li {
+.service-blocks-container {
+    display: flex;
+    flex-direction: column; /* Stack blocks by default, will be overridden for wider screens if needed, or can be row with wrap */
+    gap: 30px; /* Space between service blocks */
+}
+
+.service-block {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    background-color: #ffffff; /* White background for each block to stand out on grey section bg */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* For hover effect later */
+}
+
+.service-block:hover { /* Optional hover effect */
+    /* transform: translateY(-5px); */ /* This will be part of the JS animation step */
+    /* box-shadow: 0 4px 12px rgba(0,0,0,0.12); */
+}
+
+.service-icon-placeholder {
+    width: 80px; /* Adjust size as needed */
+    height: 80px;
+    background-color: #ccc; /* Placeholder color */
+    border-radius: 6px;
+    margin-right: 25px;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.service-text {
+    flex-grow: 1;
+}
+
+.service-text h3 {
+    font-size: 1.3rem;
     margin-bottom: 8px;
+    color: #0a0a23; /* Using the primary button color for emphasis */
 }
+
+.service-text p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.section-ctas .cta-button { /* Style CTAs in this section */
+     margin: 5px; /* Ensure spacing on mobile when they might wrap */
+}
+
 
 blockquote {
     font-style: italic;
@@ -129,288 +429,734 @@ blockquote {
     padding: 10px 20px;
     border-left: 5px solid #007bff;
     background-color: #f9f9f9;
+    font-weight: 400;
 }
 
-/* CTA Button Styling */
+/* Team Section Specifics */
+#team h2 {
+    /* General section h2 styles apply */
+    margin-bottom: 20px;
+}
+
+.team-quote {
+    font-size: 1.5rem; /* Prominent size */
+    font-style: italic;
+    color: #333; /* Darker than normal text if desired */
+    text-align: center;
+    margin: 0 auto 40px auto; /* Centered, with space below */
+    max-width: 600px; /* Constrain width */
+    line-height: 1.4;
+    border-left: 3px solid #0a0a23; /* Accent border */
+    padding-left: 15px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for team members */
+    gap: 30px; /* Space between cards */
+    max-width: 1000px; /* Max width of the grid */
+    margin: 0 auto; /* Center the grid */
+}
+
+.team-member-card {
+    background-color: #ffffff; /* White background for cards */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center; /* Center content within the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* For JS animation later */
+}
+
+/* .team-member-card:hover { // This will be controlled by JS .is-visible
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+} */
+
+.team-member-photo-placeholder {
+    width: 120px; /* Size for photo placeholder */
+    height: 120px;
+    background-color: #ccc; /* Placeholder color */
+    border-radius: 50%; /* Circular photos */
+    margin: 0 auto 20px auto; /* Centered, with space below */
+}
+
+.team-member-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #0a0a23; /* Primary accent for name */
+}
+
+.team-member-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* General CTA Button Styling - Primary */
 .cta-button {
     display: inline-block;
-    background-color: #007bff; /* Example blue */
-    color: #fff !important; /* Ensure text is white, important for overriding link styles */
-    padding: 12px 25px;
+    background-color: #0a0a23; /* Deep navy - Primary */
+    color: #ffffff;
+    padding: 12px 28px; /* Slightly more padding for a bolder look */
     text-decoration: none;
     border-radius: 5px;
-    font-weight: bold;
+    font-weight: bold; /* Figtree bold (e.g., 600 or 700) */
+    font-size: 1rem; /* Ensure consistent font size */
     margin-top: 10px;
-    margin-right: 10px; /* Spacing between buttons */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none; /* Remove default border for anchor tags styled as buttons */
+    margin-right: 10px; /* For spacing if buttons are side-by-side */
+    border: 2px solid #0a0a23; /* Border for structure, same as bg */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .cta-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    color: #fff !important; /* Ensure text remains white on hover */
+    background-color: #000000; /* Darker navy/black for hover */
+    color: #ffffff;
+    transform: translateY(-3px); /* Slightly more lift */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
-/* Hero Section */
-#hero-section {
+/* Remove margin-right from the last button in a group if they are inline-block */
+ .cta-button:last-of-type {
+     margin-right: 0;
+ }
+ /* Adjust for flex containers if buttons are wrapped in a div with flex */
+ div > .cta-button { /* If buttons are direct children of a div, this helps */
+     margin: 5px; /* More universal spacing for buttons in a flex row that might wrap */
+ }
+
+
+/* Secondary CTA Button Styling */
+.cta-button-secondary {
+    background-color: #cccccc; /* Light grey - Secondary */
+    color: #1a1a1a; /* Dark text */
+    border-color: #cccccc;
+}
+
+.cta-button-secondary:hover {
+    background-color: #b3b3b3; /* Darker grey for hover */
+    color: #1a1a1a; /* Keep text dark */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* "Our Experience" Logo Placeholders */
+#experience-section h2 {
+    /* General section h2 styles apply */
+    margin-bottom: 20px;
+}
+
+.experience-paragraphs {
+    text-align: center; /* Center the introductory paragraphs */
+    margin-bottom: 40px;
+}
+
+.experience-paragraphs p {
+    font-size: 1.1rem; /* Adjust size as needed */
+    margin-bottom: 10px;
+    line-height: 1.7;
+    max-width: 700px; /* Constrain width for readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#experience-section h3 { /* Styling for "Companies We've Worked With" */
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Space between logos */
+    max-width: 800px; /* Max width of the grid */
+    margin: 0 auto; /* Center the grid */
+}
+
+.logo-placeholder {
+    background-color: #e9e9e9; /* Light grey background for placeholder */
+    padding: 20px; /* Padding within each logo cell */
+    border-radius: 6px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #f4f4f4; 
-    min-height: 100vh;
-}
-
-#hero-section h1 {
-    font-size: 3.5rem; /* Larger for hero */
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-#hero-section p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    max-width: 600px;
-}
-
-.rotating-image-placeholder {
-    width: 250px; 
-    height: 200px; 
-    background-color: #ddd; 
-    margin: 30px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-style: italic;
+    min-height: 80px; /* Minimum height for each cell */
+    font-size: 0.9rem; /* Font size for placeholder text */
     color: #555;
-    border: 1px solid #ccc;
-    position: relative; 
-    overflow: hidden; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-/* Basic rotating animation for placeholder content if needed, actual image rotation would need JS or more complex CSS */
-.rotating-image-placeholder::after {
-    content: "Loading...";
-    animation: rotatePlaceholder 10s linear infinite;
-}
-
-@keyframes rotatePlaceholder {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.logo-placeholder:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
 }
 
 
-/* "Our Experience" Logo Placeholders */
-#experience-section .logos div { /* Target the div containing logos */
-    text-align: center; /* Center the logos container */
-}
-
-#experience-section .logos div span {
-    display: inline-block;
-    margin: 10px; /* Increased margin */
-    padding: 10px 15px; /* Increased padding */
-    background-color: #e9e9e9;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-/* Specific Section Backgrounds (can be overridden by more specific styles if needed) */
-#what-we-do-section { background-color: #ffffff; }
-#services { background-color: #f9f9f9; }
-#experience-section { background-color: #ffffff; }
-#team { background-color: #f9f9f9; }
-#contact { background-color: #ffffff; }
-
+/* Specific Section Backgrounds are now defined above with the new scheme. */
 
 /* Animations */
-.fade-in-section {
+.fade-in-section,
+.animate-on-scroll {
     opacity: 0;
-    transform: translateY(30px); /* Start slightly lower */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.65s ease-out, transform 0.65s ease-out; /* Slightly longer transition */
 }
 
-.fade-in-section.is-visible {
+.fade-in-section { /* For whole sections */
+    transform: translateY(30px);
+}
+
+/* Specific initial states for card/block animations */
+.service-block.animate-on-scroll {
+    transform: translateY(40px); /* Slide up */
+}
+
+.team-member-card.animate-on-scroll {
+    transform: translateY(40px); /* Slide up */
+}
+
+/* Visible state - this class will be added by JS */
+.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Responsive Design */
+/* Responsive Design - General (some duplicated from above for clarity but should be merged) */
+@media (min-width: 769px) { /* Changed from 768 to avoid overlap with max-width: 768px */
+    h1 { font-size: 3rem; }
+    #hero-section h1 { font-size: 4rem; }
+    #hero-section p { font-size: 1.3rem; }
+    section h2 { font-size: 2.8rem; }
+}
 
-/* Tablets and larger */
-@media (min-width: 768px) {
-    h1 {
-        font-size: 3rem;
+@media (max-width: 768px) {
+    /* main { padding-top: 70px; } /* Adjust if header height on mobile is different */
+    h1 { font-size: 2.2rem; }
+    /* #hero-section h1 { font-size: 2.8rem; } */ /* Hero H1 is now in .hero-text h1 */
+    /* #hero-section p { font-size: 1rem; padding: 0 10px; } */ /* Hero P is now in .hero-text p */
+    section h2 { font-size: 2rem; }
+    section { padding: 40px 15px; }
+    
+    .hero-container {
+        flex-direction: column; /* Stack columns on mobile */
+        text-align: center; /* Center text when stacked */
     }
-    #hero-section h1 {
-        font-size: 4rem; /* Even larger on desktop */
+    .hero-text {
+        max-width: 100%;
+        padding-right: 0;
+        margin-bottom: 30px; /* Space between text and image when stacked */
+        text-align: center; /* Ensure text alignment is centered for mobile */
     }
-    #hero-section p {
-        font-size: 1.3rem;
+    .hero-text h1 {
+       font-size: 2.8rem; /* Adjust for mobile */
     }
-    section h2 {
-        font-size: 2.8rem;
+    .hero-image-rotator {
+        max-width: 80%; /* Adjust width for mobile */
+        height: 250px; /* Adjust height for mobile */
+        margin: 0 auto; /* Center the rotator */
+    }
+
+    /* Responsive adjustments if needed for .challenges-list li on smaller screens */
+    #what-we-do-section p { /* This was inside @media before, ensuring it's here */
+         max-width: 100%;
+    }
+    .challenges-list li {
+        /* font-size: 0.95rem; */ /* Slightly smaller text on mobile if needed */
+    }
+    .challenge-icon-placeholder {
+        width: 50px;
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    /* Responsive adjustments for service blocks */
+    .service-block {
+        flex-direction: column; /* Stack icon and text vertically */
+        align-items: center; /* Center items when stacked */
+        text-align: center; /* Center text when stacked */
+    }
+    .service-icon-placeholder {
+        margin-right: 0;
+        margin-bottom: 20px; /* Space between icon and text when stacked */
+    }
+    .service-text h3 {
+        font-size: 1.2rem; /* Adjust for mobile */
+    }
+    /* End of #services specific mobile styles */
+
+    /* Responsive adjustments for logo grid */
+    .logo-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+        gap: 15px;
+        max-width: 500px;
+    }
+    .experience-paragraphs p {
+        font-size: 1rem;
+    }
+
+
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 90%;
+        text-align: center;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .cta-button:last-of-type { margin-bottom: 0; }
+
+     /* Contact section mobile text size adjustments */
+    .contact-prompt {
+        font-size: 1.1rem;
+    }
+    .contact-email {
+        font-size: 1rem;
     }
 }
 
-/* Mobile specific adjustments (smaller than 768px) */
-@media (max-width: 767px) {
-    header nav ul {
-        flex-direction: column;
-        align-items: center; /* Center items when stacked */
-        padding-top: 10px; 
-    }
+   /* Responsive adjustments for team grid */
+   @media (max-width: 992px) { /* Tablet */
+       .team-grid {
+           grid-template-columns: 1fr; /* Stack to 1 column */
+           max-width: 450px; /* Adjust max-width for single column */
+           gap: 25px;
+       }
+       .team-member-card {
+           padding: 20px;
+       }
+       .team-member-photo-placeholder {
+            width: 100px;
+            height: 100px;
+       }
+       .team-quote {
+           font-size: 1.3rem;
+       }
+   }
 
-    header nav ul li {
-        margin: 10px 0; /* More vertical margin for stacked items */
-    }
+   @media (max-width: 480px) { /* Mobile Small */
+       section {
+           padding: 40px 15px; /* Slightly reduced padding from the 768px breakpoint */
+       }
+       h2 { /* General h2 reduction */
+           font-size: 1.8rem;
+       }
+       .hero-text h1 {
+           font-size: 2.4rem; /* Further reduce hero H1 */
+       }
+       .hero-text p {
+           font-size: 0.9rem; /* Further reduce hero P */
+       }
+       .logo-grid {
+           grid-template-columns: 1fr; /* 1 column on very small screens if needed, or keep 2 */
+           max-width: 250px;
+           gap: 10px; /* Reduce gap for logo grid on small screens */
+       }
+       .logo-placeholder {
+           padding: 15px;
+           min-height: 70px;
+       }
+       .team-grid {
+           max-width: 300px; /* Further adjust for small mobiles */
+       }
+       .team-member-card h3 {
+           font-size: 1.1rem;
+       }
+       .team-member-card p {
+           font-size: 0.85rem;
+       }
+       .cta-button { /* Further adjust button padding if needed */
+           padding: 10px 15px;
+       }
+   }
 
-    main {
-        padding-top: 220px; /* Increased padding for taller mobile header (estimate) */
-    }
-    
-    h1 {
-        font-size: 2.2rem;
-    }
+#contact { /* Ensure this section has a white background as per alternating scheme */
+    background-color: #ffffff; 
+    text-align: center; /* Center align content of the contact section */
+}
 
-    #hero-section h1 {
-        font-size: 2.8rem; /* Adjusted for mobile */
-    }
+#contact h2 {
+    /* General section h2 styles apply */
+    margin-bottom: 20px;
+}
 
-    #hero-section p {
-        font-size: 1rem;
-        padding: 0 10px; /* Add some padding for hero text on mobile */
-    }
+.contact-prompt {
+    font-size: 1.2rem; /* Adjust size as needed */
+    margin-bottom: 30px;
+    color: #333;
+}
 
-    section h2 {
-        font-size: 2rem;
-    }
-    
-    section {
-        padding: 40px 15px; /* Adjust padding for mobile */
-    }
+.contact-cta.cta-button { /* Specific styling for the main contact CTA if needed */
+    /* It will inherit general .cta-button styles for primary buttons */
+    /* Add any overrides here, e.g., margin if it's the only button */
+    margin-bottom: 30px; 
+    /* background-color: #0a0a23; */ /* This is now handled by .cta-button */
+    color: #ffffff; /* Ensure text color is white, as primary button text */
+}
+.contact-cta.cta-button:hover {
+    /* background-color: #000000; */ /* Handled by .cta-button:hover */
+    /* transform: translateY(-2px); */ /* Handled by .cta-button:hover */
+}
 
-    .cta-button {
-        padding: 10px 20px; /* Slightly smaller buttons on mobile */
-        font-size: 0.9rem;
-        width: 90%; /* Make buttons wider on mobile */
-        text-align: center;
-        margin-right: 0; /* Remove right margin for stacked buttons */
-        margin-bottom: 10px; /* Add bottom margin for stacked buttons */
-    }
-    .cta-button:last-of-type {
-        margin-bottom: 0;
-    }
+.contact-email {
+    font-size: 1.1rem; /* Adjust size as needed */
+    color: #333;
+}
+
+.contact-email a {
+    color: #0a0a23; /* Use accent color for the email link */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-email a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments if needed - already covered in main @media (max-width: 768px) block */
+
+/* Footer Styling */
+footer {
+    background-color: #1a1a1a; /* Dark background for footer */
+    color: #f0f0f0; /* Light text */
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+footer .section-container p { /* Ensure container padding is respected */
+    margin: 0;
+}
+
+/* Back to Top Button Styling */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0a0a23; /* Primary button color */
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px; /* Vertically center arrow */
+    font-size: 1.5rem; /* Size of the arrow */
+    border-radius: 50%; /* Circular button */
+    text-decoration: none;
+    opacity: 0; /* Hidden by default */
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, background-color 0.2s ease;
+    z-index: 1000;
+}
+.back-to-top:hover {
+    background-color: #000000; /* Darker on hover */
+}
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
 }
     </style>
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="#what-we-do-section">What We Do</a></li>
-                <li><a href="#services">What We Offer</a></li>
-                <li><a href="#experience-section">Our Experience</a></li>
-                <li><a href="#team">Who We Are</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container"> <!-- Add a container for max-width control -->
+            <a href="#" class="logo">OdySi</a> <!-- Simple text logo for now -->
+            <nav>
+                <button class="nav-toggle" aria-label="toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <ul>
+                    <li><a href="#hero-section">Home</a></li> <!-- Changed from #what-we-do as first item -->
+                    <li><a href="#what-we-do-section">What We Do</a></li>
+                    <li><a href="#services">What We Offer</a></li>
+                    <li><a href="#experience-section">Our Experience</a></li>
+                    <li><a href="#team">Who We Are</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- Placeholder for sections -->
     <main>
-        <section id="hero-section" class="fade-in-section">
-            <h1>Build.<br>Raise.<br>Grow.</h1>
-            <p>We help startups, scaleups, and tech-enabled SMEs with product innovation, capital raising, and AI implementation, and turn it into growth.</p>
-            <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a Call</a>
-            <div class="rotating-image-placeholder">
-                Rotating Image Placeholder
+        <section id="hero-section" class="fade-in-section"> <!-- Keep existing background color, min-height -->
+            <div class="section-container hero-container"> <!-- Add a specific class for hero container styling -->
+                <div class="hero-text">
+                    <h1>Build.<br>Raise.<br>Grow.</h1>
+                    <p>We help startups, scaleups, and tech-enabled SMEs with product innovation, capital raising, and AI implementation, and turn it into growth.</p>
+                    <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a Call</a>
+                </div>
+                <div class="hero-image-rotator">
+                    <!-- Placeholder images -->
+                    <div class="rotating-image active" style="background-color: #ddd;">Image 1</div>
+                    <div class="rotating-image" style="background-color: #aaa;">Image 2</div>
+                    <div class="rotating-image" style="background-color: #777;">Image 3</div>
+                </div>
             </div>
         </section>
 
         <section id="what-we-do-section" class="fade-in-section">
-            <h2>What We Do</h2>
-            <p>We work with post-seed startups, scaleups, and tech-enabled SMEs that have outgrown the early hustle but aren't ready—or don't want—to hire a full internal strategy team.</p>
-            <p>You've built something that works. But now you're facing new challenges: flatlining growth, messy expansion, or an investor story that doesn't quite land. At this stage, clarity, execution, and structure matter more than speed alone.</p>
+            <div class="section-container">
+                <h2>What We Do</h2>
+                <p>We work with post-seed startups, scaleups, and tech-enabled SMEs that have outgrown the early hustle but aren't ready—or don't want—to hire a full internal strategy team.</p>
+                <p>You've built something that works. But now you're facing new challenges: flatlining growth, messy expansion, or an investor story that doesn't quite land. At this stage, clarity, execution, and structure matter more than speed alone.</p>
+            
+            <!-- Optional: Add a divider label here if it fits the design -->
+            <!-- <div class="section-divider-with-label"><span>Challenges We Solve</span></div> -->
+
             <h3>Common challenges:</h3>
-            <ul>
-                <li>Growth Bottlenecks – Struggling to scale or expand into new markets</li>
-                <li>Go-to-Market Confusion – No clear plan across teams or markets</li>
-                <li>Weak Investor Narrative – Decks, models, and KPIs don't reflect ambition</li>
-                <li>Product Problems – Products don’t drive growth, updates are slow or buggy</li>
-                <li>No Internal Bandwidth – Founders still own product, sales, and ops</li>
+            <ul class="challenges-list">
+                <li>
+                    <div class="challenge-icon-placeholder"></div>
+                    <span>Growth Bottlenecks – Struggling to scale or expand into new markets</span>
+                </li>
+                <li>
+                    <div class="challenge-icon-placeholder"></div>
+                    <span>Go-to-Market Confusion – No clear plan across teams or markets</span>
+                </li>
+                <li>
+                    <div class="challenge-icon-placeholder"></div>
+                    <span>Weak Investor Narrative – Decks, models, and KPIs don't reflect ambition</span>
+                </li>
+                <li>
+                    <div class="challenge-icon-placeholder"></div>
+                    <span>Product Problems – Products don’t drive growth, updates are slow or buggy</span>
+                </li>
+                <li>
+                    <div class="challenge-icon-placeholder"></div>
+                    <span>No Internal Bandwidth – Founders still own product, sales, and ops</span>
+                </li>
             </ul>
-        </section>
-        <section id="services" class="fade-in-section">
-            <h2>What We Offer</h2>
-            
-            <h3>Go-to-Market & Expansion:</h3>
-            <p>Define ICP, prioritise segments, localise messaging, launch with GTM playbooks</p>
-            
-            <h3>Fundraising Readiness:</h3>
-            <p>Refine pitch, deck, and model. Prepare for demo day. Metrics-driven storytelling</p>
-            
-            <h3>Product & Product Operations:</h3>
-            <p>Define vision, improve delivery, build teams, ship faster with fewer bugs</p>
-            
-            <h3>Growth Engine & Acquisition:</h3>
-            <p>Build growth loops, onboarding flows, outbound systems, and analytics</p>
-            
-            <h3>AI Strategy & Workflow Automation:</h3>
-            <p>Find automation opportunities, prototype copilots, run high-impact pilots</p>
-            
-            <a href="https://form.typeform.com/to/hKyT2ELp" class="cta-button">Take our Survey</a>
-            <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a call</a>
-        </section>
-        <section id="experience-section" class="fade-in-section">
-            <h2>Our Experience</h2>
-            <p>We've launched and scaled products at Amazon and Shopify</p>
-            <p>We’ve raised capital and built investor narratives for EU startups</p>
-            <p>We’ve led market expansion and organisational change from Spain to the UK</p>
-            
-            <h3 class="logos">Logos:</h3>
-            <div>
-                <span>[Placeholder: Binance Logo]</span>
-                <span>[Placeholder: UN Logo]</span>
-                <span>[Placeholder: TravelPerk Logo]</span>
-                <span>[Placeholder: Unilever Logo]</span>
-                <span>[Placeholder: Amazon Logo]</span>
-                <span>[Placeholder: Shopify Logo]</span>
-                <span>[Placeholder: JPMorgan Logo]</span>
-                <span>[Placeholder: Demium Logo]</span>
-                <span>[Placeholder: Glovo Logo]</span>
             </div>
         </section>
-        <section id="team" class="fade-in-section">
-            <h2>Who We Are</h2>
-            <blockquote>"Built by operators, not career consultants."</blockquote>
-            
-            <div>
-                <h3>Mike Tucci</h3>
-                <p>Former Amazon and Shopify product leader.</p>
-            </div>
-            
-            <div>
-                <h3>Thomas Trincado</h3>
-                <p>Strategy founder, raised capital, led startups to 8-figure revenue.</p>
-            </div>
-            
-            <div>
-                <h3>Enric Gallofré</h3>
-                <p>Purplecare founder, healthcare ops and service design specialist.</p>
+        <section id="services" class="fade-in-section"> <!-- Keep alternating background color: #f9f9f9 -->
+            <div class="section-container">
+                <h2>What We Offer</h2>
+                <!-- Optional: Add a divider label here if it fits the design -->
+                <!-- <div class="section-divider-with-label"><span>Our Services</span></div> -->
+
+                <div class="service-blocks-container">
+                    <div class="service-block animate-on-scroll">
+                        <div class="service-icon-placeholder"></div>
+                        <div class="service-text">
+                            <h3>Go-to-Market & Expansion:</h3>
+                            <p>Define ICP, prioritise segments, localise messaging, launch with GTM playbooks</p>
+                        </div>
+                    </div>
+
+                    <div class="service-block animate-on-scroll">
+                        <div class="service-icon-placeholder"></div>
+                        <div class="service-text">
+                            <h3>Fundraising Readiness:</h3>
+                            <p>Refine pitch, deck, and model. Prepare for demo day. Metrics-driven storytelling</p>
+                        </div>
+                    </div>
+
+                    <div class="service-block animate-on-scroll">
+                        <div class="service-icon-placeholder"></div>
+                        <div class="service-text">
+                            <h3>Product & Product Operations:</h3>
+                            <p>Define vision, improve delivery, build teams, ship faster with fewer bugs</p>
+                        </div>
+                    </div>
+
+                    <div class="service-block animate-on-scroll">
+                        <div class="service-icon-placeholder"></div>
+                        <div class="service-text">
+                            <h3>Growth Engine & Acquisition:</h3>
+                            <p>Build growth loops, onboarding flows, outbound systems, and analytics</p>
+                        </div>
+                    </div>
+
+                    <div class="service-block animate-on-scroll">
+                        <div class="service-icon-placeholder"></div>
+                        <div class="service-text">
+                            <h3>AI Strategy & Workflow Automation:</h3>
+                            <p>Find automation opportunities, prototype copilots, run high-impact pilots</p>
+                        </div>
+                    </div>
+                </div> <!-- end .service-blocks-container -->
+
+                <div class="section-ctas" style="text-align: center; margin-top: 40px;">
+                    <a href="https://form.typeform.com/to/hKyT2ELp" class="cta-button cta-button-secondary">Take our Survey</a> <!-- Added cta-button-secondary -->
+                    <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a call</a> <!-- This one remains primary -->
+                </div>
             </div>
         </section>
-        <section id="contact" class="fade-in-section">
-            <h2>Contact</h2>
-            <p>Tell us what you're trying to solve.</p>
-            
-            <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a Free Strategy Call</a>
-            <p>Email: <a href="mailto:odysi.studio@gmail.com">odysi.studio@gmail.com</a></p>
+        <section id="experience-section" class="fade-in-section"> <!-- Keep alternating background: #ffffff -->
+            <div class="section-container">
+                <h2>Our Experience</h2>
+                <div class="experience-paragraphs">
+                    <p>We've launched and scaled products at Amazon and Shopify</p>
+                    <p>We’ve raised capital and built investor narratives for EU startups</p>
+                    <p>We’ve led market expansion and organisational change from Spain to the UK</p>
+                </div>
+
+                <!-- Optional: Add a divider label here if it fits the design -->
+                <!-- <div class="section-divider-with-label"><span>Companies We've Impacted</span></div> -->
+                
+                <h3>Companies We've Worked With</h3> <!-- Added a sub-heading for the logos -->
+                <div class="logo-grid">
+                    <div class="logo-placeholder"><span>Binance</span></div>
+                    <div class="logo-placeholder"><span>UN</span></div>
+                    <div class="logo-placeholder"><span>TravelPerk</span></div>
+                    <div class="logo-placeholder"><span>Unilever</span></div>
+                    <div class="logo-placeholder"><span>Amazon</span></div>
+                    <div class="logo-placeholder"><span>Shopify</span></div>
+                    <div class="logo-placeholder"><span>JPMorgan</span></div>
+                    <div class="logo-placeholder"><span>Demium</span></div>
+                    <div class="logo-placeholder"><span>Glovo</span></div>
+                </div>
+            </div>
+        </section>
+        <section id="team" class="fade-in-section"> <!-- Keep alternating background: #f9f9f9 -->
+            <div class="section-container">
+                <h2>Who We Are</h2>
+                <blockquote class="team-quote">
+                    "Built by operators, not career consultants."
+                </blockquote>
+
+                <div class="team-grid">
+                    <div class="team-member-card animate-on-scroll">
+                        <div class="team-member-photo-placeholder"></div>
+                        <h3>Mike Tucci</h3>
+                        <p>Former Amazon and Shopify product leader.</p>
+                    </div>
+
+                    <div class="team-member-card animate-on-scroll">
+                        <div class="team-member-photo-placeholder"></div>
+                        <h3>Thomas Trincado</h3>
+                        <p>Strategy founder, raised capital, led startups to 8-figure revenue.</p>
+                    </div>
+
+                    <div class="team-member-card animate-on-scroll">
+                        <div class="team-member-photo-placeholder"></div>
+                        <h3>Enric Gallofré</h3>
+                        <p>Purplecare founder, healthcare ops and service design specialist.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="fade-in-section"> <!-- Keep alternating background: #ffffff -->
+            <div class="section-container">
+                <h2>Contact</h2>
+                <p class="contact-prompt">Tell us what you're trying to solve.</p>
+                
+                <a href="https://calendly.com/odysi-studio/30min" class="cta-button contact-cta">Book a Free Strategy Call</a>
+                
+                <p class="contact-email">
+                    Email: <a href="mailto:odysi.studio@gmail.com">odysi.studio@gmail.com</a>
+                </p>
+            </div>
         </section>
     </main>
 
+    <a href="#hero-section" class="back-to-top" aria-label="Back to top" title="Back to top">
+        &uarr; <!-- Up arrow character -->
+    </a>
+
+    <footer>
+        <div class="section-container">
+            <p>&copy; <span id="current-year"></span> Odysi Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script>
-        // JavaScript will go here
+// Shrink on Scroll
+const header = document.querySelector('header');
+if (header) { // Check if header exists
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) { // Adjust 50 to when you want the shrink to happen
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+}
+
+// Mobile Nav Toggle
+const navToggle = document.querySelector('.nav-toggle');
+const navUl = document.querySelector('nav ul');
+
+if (navToggle && navUl) { // ensure elements exist
+    navToggle.addEventListener('click', () => { // Corrected arrow function
+        navUl.classList.toggle('active');
+        navToggle.classList.toggle('active'); // For hamburger animation
+    });
+
+    // Optional: Close mobile menu when a link is clicked
+    navUl.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => { // Corrected arrow function
+            if (navUl.classList.contains('active')) {
+                navUl.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+    });
+}
+
+// Scroll-triggered Animations & Image Rotator Logic
+document.addEventListener('DOMContentLoaded', () => {
+    // Combined Intersection Observer for all animated elements
+    const animatedElements = document.querySelectorAll('.fade-in-section, .animate-on-scroll');
+
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for browsers that don't support IntersectionObserver
+        Array.from(animatedElements).forEach(el => el.classList.add('is-visible'));
+        // return; // Don't return here if there's other JS below that needs to run
+    } else {
+        const observerOptions = {
+            root: null, // Use the viewport as the root
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        animatedElements.forEach(el => observer.observe(el));
+    } // End of IntersectionObserver logic
+    
+    // Hero Image Rotator Logic (remains inside DOMContentLoaded)
+    const imagesRotator = document.querySelectorAll('.hero-image-rotator .rotating-image'); // Renamed to avoid conflict
+    let currentImageIndexRotator = 0; // Renamed to avoid conflict
+
+    if (imagesRotator.length > 0) {
+       imagesRotator[currentImageIndexRotator].classList.add('active'); // Show the first image initially
+
+       setInterval(() => {
+           imagesRotator[currentImageIndexRotator].classList.remove('active');
+           currentImageIndexRotator = (currentImageIndexRotator + 1) % imagesRotator.length;
+           imagesRotator[currentImageIndexRotator].classList.add('active');
+       }, 2500); // 2.5 seconds
+    }
+
+    // Current Year for Footer
+    const yearSpan = document.getElementById('current-year');
+    if(yearSpan) {
+       yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // "Back to Top" Button Visibility
+    const backToTopButton = document.querySelector('.back-to-top');
+    if (backToTopButton) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+    }
+
+}); // End of DOMContentLoaded
+// Note: Image rotator logic is now inside DOMContentLoaded.
+// The old fade-in-section specific observer is removed as it's covered by the new combined one.
+// The duplicated image rotator script below DOMContentLoaded has been removed.
     </script>
 </body>
 </html>
