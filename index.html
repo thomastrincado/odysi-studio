@@ -336,13 +336,15 @@ section .section-container > h2 { /* Target h2s that are direct children of .sec
     color: #1a1a1a; /* Near-black color */
     padding: 0 20px; /* Space between text and lines */
     white-space: nowrap; /* Prevent text from wrapping if lines push it */
+    flex-shrink: 0; /* Prevent text from shrinking */
+    flex-grow: 0; /* Prevent text from growing */
 }
 
 .heading-line {
     height: 1px;
     background-color: #cccccc; /* Light grey line color */
-    width: 80px; /* Default line length for desktop */
-    transition: width 0.3s ease-in-out; /* Smooth transition for responsive changes */
+    flex-grow: 1; /* Allows lines to expand and fill available space */
+    /* Remove fixed width and its transition */
 }
 
 /* Remove any specific text-align:center from h2 if it was previously set, 
@@ -831,9 +833,7 @@ blockquote {
         font-size: 1.3rem; /* Slightly smaller on tablets */
         padding: 0 15px;
     }
-    .heading-line {
-        width: 60px; /* Shorter lines on tablets */
-    }
+    /* .heading-line width was previously adjusted here - this adjustment is no longer needed. */
 }
 
    /* Responsive adjustments for team grid */
@@ -869,9 +869,7 @@ blockquote {
            font-size: 1.2rem; /* Smaller on mobiles */
            padding: 0 10px;
        }
-       .heading-line {
-           width: 40px; /* Even shorter lines on mobiles */
-       }
+    /* .heading-line width was previously adjusted here - this adjustment is no longer needed. */
        .hero-text h1 {
            font-size: 2.4rem; /* Further reduce hero H1 */
        }
@@ -1001,7 +999,7 @@ footer .section-container p { /* Ensure container padding is respected */
 <body>
     <header>
         <div class="container"> <!-- Add a container for max-width control -->
-            <a href="#" class="logo">OdySi</a> <!-- Simple text logo for now -->
+            <a href="#" class="logo">Odysi Studio</a> <!-- Simple text logo for now -->
             <nav>
                 <button class="nav-toggle" aria-label="toggle navigation">
                     <span class="hamburger"></span>
