@@ -288,11 +288,9 @@ section {
     left: 0;
     opacity: 0;
     transition: opacity 0.5s ease-in-out; /* For fade effect */
-    border-radius: 8px; /* Match parent if using */
-    display:flex; align-items:center; justify-content:center; /* Moved from inline to CSS */
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
+    border-radius: 8px; /* Keep if the container has rounded corners */
+    object-fit: contain; /* Ensures image scales within its bounds */
+    /* Removed display:flex, align-items, justify-content, font-size, font-weight, color */
 }
 .rotating-image.active {
     opacity: 1;
@@ -404,14 +402,21 @@ ul li { margin-bottom: 8px; }
     text-align: center; /* Ensure text within is centered */
     /* margin-bottom will be handled by grid gap or specific item margins */
 }
-.challenge-icon-placeholder {
-    width: 100px; /* Target width */
-    height: 100px; /* Maintain 1:1 aspect ratio */
-    background-color: #e0e0e0; /* Slightly different placeholder color for visibility */
-    border-radius: 8px; /* Optional: slightly rounded corners for icon placeholder itself */
-    margin-bottom: 20px; /* Space below icon */
-    /* Previous: flex-shrink: 0; margin-right are not needed for column flex */
+.challenge-icon { /* New class for the images replacing the div placeholders */
+    width: 80px;    /* Target width, can be adjusted to 100px if preferred */
+    height: auto;   /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space below icon, same as before */
 }
+/* Old .challenge-icon-placeholder styles can be removed or commented out if no longer used by other elements */
+/*
+.challenge-icon-placeholder {
+    width: 100px; 
+    height: 100px; 
+    background-color: #e0e0e0; 
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+}
+*/
 .challenge-title { /* Was h4 */
     font-family: 'Figtree', sans-serif;
     text-transform: uppercase;
@@ -743,9 +748,8 @@ blockquote {
          max-width: 100%; /* Keep this for mobile */
     }
     /* .challenges-list li is now styled for grid, specific mobile changes below */
-    .challenge-icon-placeholder { /* Base mobile style if needed, then overridden */
-        width: 80px; /* Default for smaller screens before very small */
-        height: 80px;
+    .challenge-icon { /* Responsive adjustments for new image icons */
+        width: 70px; /* Adjust for smaller screens */
         margin-bottom: 15px;
     }
      .challenge-title {
@@ -1026,10 +1030,9 @@ footer .section-container p { /* Ensure container padding is respected */
                     <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a Call</a>
                 </div>
                 <div class="hero-image-rotator">
-                    <!-- Placeholder images -->
-                    <div class="rotating-image active" style="background-color: #ddd;">Image 1</div>
-                    <div class="rotating-image" style="background-color: #aaa;">Image 2</div>
-                    <div class="rotating-image" style="background-color: #777;">Image 3</div>
+                    <img src="images/origami2.png" alt="Abstract origami structure" class="rotating-image active">
+                    <img src="images/prism.png" alt="Colorful prism" class="rotating-image">
+                    <img src="images/compass.png" alt="Navigational compass" class="rotating-image">
                 </div>
             </div>
         </section>
@@ -1046,27 +1049,27 @@ footer .section-container p { /* Ensure container padding is respected */
                 <h3>Common challenges:</h3>
                 <ul class="challenges-list">
                     <li>
-                        <div class="challenge-icon-placeholder"></div>
+                    <img src="images/ladder.png" alt="Ladder leaning against a wall" class="challenge-icon">
                         <h4 class="challenge-title">GROWTH BOTTLENECKS</h4>
                         <p class="challenge-description">Struggling to scale or expand into new markets</p>
                     </li>
                     <li>
-                        <div class="challenge-icon-placeholder"></div>
+                    <img src="images/compass.png" alt="Navigational compass" class="challenge-icon">
                         <h4 class="challenge-title">GO-TO-MARKET CONFUSION</h4>
                         <p class="challenge-description">No clear plan across teams or markets</p>
                     </li>
                     <li>
-                        <div class="challenge-icon-placeholder"></div>
+                    <img src="images/balloon.png" alt="Hot air balloon" class="challenge-icon">
                         <h4 class="challenge-title">WEAK INVESTOR NARRATIVE</h4>
                         <p class="challenge-description">Decks, models, and KPIs don't reflect ambition</p>
                     </li>
                     <li>
-                        <div class="challenge-icon-placeholder"></div>
+                    <img src="images/puzzle.png" alt="Jigsaw puzzle piece" class="challenge-icon">
                         <h4 class="challenge-title">PRODUCT PROBLEMS</h4>
                         <p class="challenge-description">Products don’t drive growth, updates are slow or buggy</p>
                     </li>
                     <li>
-                        <div class="challenge-icon-placeholder"></div>
+                    <img src="images/knife.png" alt="Swiss army knife" class="challenge-icon">
                         <h4 class="challenge-title">NO INTERNAL BANDWIDTH</h4>
                         <p class="challenge-description">Founders still own product, sales, and ops</p>
                     </li>
