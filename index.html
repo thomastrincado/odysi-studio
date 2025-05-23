@@ -202,7 +202,7 @@ section {
 
 /* Specific Section Backgrounds for Alternating Effect */
 #hero-section { background-color: #f0f0f0; } /* Assuming hero has a distinct light grey, or can be changed */
-#what-we-do-section { background-color: #ffffff; }
+#what-we-do-section { background-color: #ffffff !important; } /* Ensure pure white */
 #services { background-color: #f9f9f9; }
 #experience-section { background-color: #ffffff; }
 #team { background-color: #f9f9f9; }
@@ -313,8 +313,51 @@ h1, h2, h3 {
     font-weight: 600; /* Example weight for Figtree */
 }
 h1 { font-size: 2.8rem; }
-h2 { text-align: center; margin-bottom: 40px; font-size: 2.5rem; font-weight: 600;}
+/* h2 { text-align: center; margin-bottom: 40px; font-size: 2.5rem; font-weight: 600;} */ /* Old h2 styling - will be replaced */
 h3 { margin-top: 25px; margin-bottom: 15px; font-size: 1.8rem; color: #333333; font-weight: 500;}
+
+/* Styling for the new section heading structure */
+section .section-container > h2 { /* Target h2s that are direct children of .section-container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px; /* Increased top margin */
+    margin-bottom: 60px; /* Increased bottom margin */
+    width: 100%; /* Ensure the flex container takes full width for centering */
+    font-size: 2.5rem; /* Retain base font size from previous h2 styling */
+    font-weight: 600; /* Retain font weight */
+}
+
+.heading-text {
+    font-family: 'Figtree', sans-serif; /* Ensure Figtree is applied */
+    font-weight: bold; /* Bold */
+    text-transform: uppercase; /* Uppercase */
+    font-size: 1.4rem; /* Base font size for desktop */
+    color: #1a1a1a; /* Near-black color */
+    padding: 0 20px; /* Space between text and lines */
+    white-space: nowrap; /* Prevent text from wrapping if lines push it */
+}
+
+.heading-line {
+    height: 1px;
+    background-color: #cccccc; /* Light grey line color */
+    width: 80px; /* Default line length for desktop */
+    transition: width 0.3s ease-in-out; /* Smooth transition for responsive changes */
+}
+
+/* Remove any specific text-align:center from h2 if it was previously set, 
+   as the flex properties on the h2 itself will handle centering of its children. */
+#what-we-do-section h2, 
+#services h2, 
+#experience-section h2, 
+#team h2, 
+#contact h2 {
+    text-align: initial; /* Reset text-align if it was set to center before */
+    /* Other specific h2 margins like margin-bottom might need to be removed if now handled by the new structure's margins */
+    margin-bottom: 0; /* Reset bottom margin if it was set, now handled by the new h2 rule */
+    /* Retain existing margin-top if needed or let the new rule handle it */
+    margin-top: 0; /* Reset top margin as well, handled by new rule */
+}
 
 /* Paragraph and List Styling */
 p { margin-bottom: 15px; font-size: 1rem; color: #333333; font-weight: 400;} /* Example weight */
@@ -323,51 +366,74 @@ nav ul { padding-left: 0; } /* Ensure nav ul specifically has no padding */
 ul li { margin-bottom: 8px; }
 
 /* "What We Do" Section Specifics: */
-#what-we-do-section h2 {
-    /* General section h2 styles should apply; add specific overrides if needed */
+#what-we-do-section .section-intro p { /* Targeting paragraphs within .section-intro specifically */
+    margin-bottom: 15px; 
+    max-width: 800px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    text-align: center; 
 }
-#what-we-do-section p {
-    margin-bottom: 15px; /* Adjust spacing for paragraphs */
-    max-width: 800px; /* Constrain paragraph width for readability if needed */
-    margin-left: auto; /* Center if max-width is used */
-    margin-right: auto; /* Center if max-width is used */
-    text-align: center; /* Assuming intro paragraphs are centered */
-}
-#what-we-do-section h3 {
-    text-align: center; /* Center "Common challenges:" heading */
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-size: 1.6rem; /* Adjust size */
+#what-we-do-section h3 { /* Styling for "Common challenges:" heading */
+    text-align: center;
+    font-size: 1.6rem; /* From previous styling */
+    margin-top: 40px; /* From previous styling */
+    margin-bottom: 30px; /* Space before the grid */
+    color: #333;
 }
 .challenges-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns on desktop */
+    gap: 30px; /* Generous spacing between items */
     list-style: none;
     padding: 0;
-    max-width: 700px; /* Max width for the list */
-    margin: 0 auto; /* Center the list */
+    max-width: 1100px; /* Align with section container or adjust as needed */
+    margin: 0 auto;
 }
 .challenges-list li {
+    /* Remove all previous background, padding, border-radius, box-shadow that made it a card */
+    background-color: transparent;
+    padding: 0; /* Reset padding */
+    border-radius: 0;
+    box-shadow: none;
+    /* New flex properties for vertical alignment of content within the li */
     display: flex;
-    align-items: center; /* Align icon with text */
-    margin-bottom: 15px; /* Space between list items */
-    padding: 10px;
-    background-color: #f9f9f9; /* Slight background for each item, if desired, or keep it transparent */
-    border-radius: 6px;
-    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */ /* Optional subtle shadow */
+    flex-direction: column;
+    align-items: center; /* Center items horizontally in the column */
+    text-align: center; /* Ensure text within is centered */
+    /* margin-bottom will be handled by grid gap or specific item margins */
 }
 .challenge-icon-placeholder {
-    width: 60px; /* Max-width 100px, but start smaller for balance */
-    height: 60px; /* 1:1 Aspect ratio */
-    background-color: #ccc; /* Placeholder color */
-    border-radius: 4px; /* Slightly rounded corners for the placeholder */
-    margin-right: 20px; /* Space between icon and text */
-    flex-shrink: 0; /* Prevent icon from shrinking if text is long */
-    /* max-width: 100px; This is a constraint, actual size set by width/height */
+    width: 100px; /* Target width */
+    height: 100px; /* Maintain 1:1 aspect ratio */
+    background-color: #e0e0e0; /* Slightly different placeholder color for visibility */
+    border-radius: 8px; /* Optional: slightly rounded corners for icon placeholder itself */
+    margin-bottom: 20px; /* Space below icon */
+    /* Previous: flex-shrink: 0; margin-right are not needed for column flex */
 }
-.challenges-list li span {
-   flex-grow: 1;
+.challenge-title { /* Was h4 */
+    font-family: 'Figtree', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    color: #1a1a1a; /* Black or near-black */
+    margin-bottom: 10px; /* Space below title */
+    /* Ensure it can wrap to two lines if needed without breaking layout */
+    line-height: 1.3; 
+}
+.challenge-description {
+    font-family: 'Figtree', sans-serif;
+    font-size: 0.95rem;
+    color: #555; /* Lighter grey */
+    line-height: 1.5;
+    max-width: 200px; /* Constrain width for better centering and readability if needed */
+    margin: 0 auto; /* Center description text if max-width is applied */
 }
 
 /* "What We Offer" / Services Section Specifics: */
+#services {
+    background-color: #f9f9f9 !important; /* Ensure light grey */
+}
 #services h2 {
     /* General section h2 styles apply */
     margin-bottom: 40px; /* More space before blocks */
@@ -375,50 +441,63 @@ ul li { margin-bottom: 8px; }
 
 .service-blocks-container {
     display: flex;
-    flex-direction: column; /* Stack blocks by default, will be overridden for wider screens if needed, or can be row with wrap */
-    gap: 30px; /* Space between service blocks */
+    flex-direction: column; /* Stack blocks by default */
+    gap: 0; /* Reset gap, margin-bottom on service-block will handle spacing */
 }
 
 .service-block {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
-    background-color: #ffffff; /* White background for each block to stand out on grey section bg */
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* For hover effect later */
+    align-items: flex-start; 
+    background-color: transparent; /* Remove card background */
+    padding: 20px 0; /* Vertical padding for spacing, no horizontal */
+    box-shadow: none; /* Remove shadow */
+    border-radius: 0; /* Remove border-radius */
+    margin-bottom: 30px; /* Space between service blocks */
+    transition: none; /* Remove previous transitions if any */
+}
+.service-block:last-child {
+    margin-bottom: 0; /* No margin for the last block before CTAs */
 }
 
-.service-block:hover { /* Optional hover effect */
-    /* transform: translateY(-5px); */ /* This will be part of the JS animation step */
-    /* box-shadow: 0 4px 12px rgba(0,0,0,0.12); */
+.service-block:hover { /* Remove hover effects that implied a card */
+    transform: none;
+    box-shadow: none;
 }
 
 .service-icon-placeholder {
-    width: 80px; /* Adjust size as needed */
-    height: 80px;
-    background-color: #ccc; /* Placeholder color */
-    border-radius: 6px;
-    margin-right: 25px;
+    width: 100px; /* Target width */
+    height: 100px; /* Maintain 1:1 aspect ratio */
+    background-color: #d0d0d0; /* Placeholder color, distinct from challenges section */
+    border-radius: 8px; /* Optional: slightly rounded corners */
+    margin-right: 30px; /* Ample space between icon and text */
     flex-shrink: 0; /* Prevent shrinking */
 }
 
 .service-text {
     flex-grow: 1;
+    text-align: left; /* Ensure text is left-aligned */
 }
 
-.service-text h3 {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
-    color: #0a0a23; /* Using the primary button color for emphasis */
+.service-text h3 { /* Title */
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1.1rem; /* Adjust size as needed */
+    color: #1a1a1a; /* Near-black */
+    margin-bottom: 10px; /* Space below title */
 }
 
-.service-text p {
-    font-size: 0.95rem;
+.service-text p { /* Description */
+    font-size: 1rem; /* Slightly larger than default body text */
     line-height: 1.5;
+    color: #333; /* Standard text color, not too light */
 }
 
-.section-ctas .cta-button { /* Style CTAs in this section */
+#services .section-ctas { /* Ensure CTAs are centered and spaced */
+   text-align: center;
+   margin-top: 50px; /* More space above CTAs */
+}
+#services .section-ctas .cta-button { /* Style CTAs in this section */
      margin: 5px; /* Ensure spacing on mobile when they might wrap */
 }
 
@@ -427,7 +506,7 @@ blockquote {
     font-style: italic;
     margin: 20px 0;
     padding: 10px 20px;
-    border-left: 5px solid #007bff;
+    border-left: 5px solid #0a0a23; /* Updated to primary accent color */
     background-color: #f9f9f9;
     font-weight: 400;
 }
@@ -657,30 +736,45 @@ blockquote {
     }
 
     /* Responsive adjustments if needed for .challenges-list li on smaller screens */
-    #what-we-do-section p { /* This was inside @media before, ensuring it's here */
-         max-width: 100%;
+    /* #what-we-do-section p is now #what-we-do-section .section-intro p */
+    #what-we-do-section .section-intro p {
+         max-width: 100%; /* Keep this for mobile */
     }
-    .challenges-list li {
-        /* font-size: 0.95rem; */ /* Slightly smaller text on mobile if needed */
+    /* .challenges-list li is now styled for grid, specific mobile changes below */
+    .challenge-icon-placeholder { /* Base mobile style if needed, then overridden */
+        width: 80px; /* Default for smaller screens before very small */
+        height: 80px;
+        margin-bottom: 15px;
     }
-    .challenge-icon-placeholder {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-    }
+     .challenge-title {
+        font-size: 0.8rem;
+     }
+     .challenge-description {
+        font-size: 0.9rem;
+     }
+
 
     /* Responsive adjustments for service blocks */
     .service-block {
-        flex-direction: column; /* Stack icon and text vertically */
+        flex-direction: column; /* Stack icon and text */
         align-items: center; /* Center items when stacked */
-        text-align: center; /* Center text when stacked */
+        padding: 15px 0; /* Adjust vertical padding */
+        margin-bottom: 25px;
     }
     .service-icon-placeholder {
         margin-right: 0;
         margin-bottom: 20px; /* Space between icon and text when stacked */
+        width: 80px; /* Slightly smaller icon on mobile */
+        height: 80px;
+    }
+    .service-text {
+        text-align: center; /* Center text when stacked */
     }
     .service-text h3 {
-        font-size: 1.2rem; /* Adjust for mobile */
+        font-size: 1rem;
+    }
+    .service-text p {
+        font-size: 0.95rem;
     }
     /* End of #services specific mobile styles */
 
@@ -692,6 +786,22 @@ blockquote {
     }
     .experience-paragraphs p {
         font-size: 1rem;
+    }
+
+    /* Responsive Adjustments for .challenges-list Grid */
+    @media (max-width: 992px) { /* Tablet */
+        .challenges-list {
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 25px;
+        }
+    }
+
+    @media (max-width: 768px) { /* Smaller Tablet / Large Mobile */
+        .challenges-list {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
+            gap: 20px;
+        }
+        /* .challenge-icon-placeholder and text styles already have mobile-first considerations or are adjusted above */
     }
 
 
@@ -711,6 +821,18 @@ blockquote {
     }
     .contact-email {
         font-size: 1rem;
+    }
+    /* Responsive adjustments for section headings */
+    section .section-container > h2 {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .heading-text {
+        font-size: 1.3rem; /* Slightly smaller on tablets */
+        padding: 0 15px;
+    }
+    .heading-line {
+        width: 60px; /* Shorter lines on tablets */
     }
 }
 
@@ -737,8 +859,18 @@ blockquote {
        section {
            padding: 40px 15px; /* Slightly reduced padding from the 768px breakpoint */
        }
-       h2 { /* General h2 reduction */
-           font-size: 1.8rem;
+       /* h2 { font-size: 1.8rem; } */ /* General h2 reduction - now handled by section .section-container > h2 */
+       section .section-container > h2 { /* Specific override for small mobiles if needed */
+           font-size: 1.8rem; /* Apply the general h2 reduction here */
+           margin-top: 40px;
+           margin-bottom: 40px;
+       }
+       .heading-text {
+           font-size: 1.2rem; /* Smaller on mobiles */
+           padding: 0 10px;
+       }
+       .heading-line {
+           width: 40px; /* Even shorter lines on mobiles */
        }
        .hero-text h1 {
            font-size: 2.4rem; /* Further reduce hero H1 */
@@ -767,6 +899,18 @@ blockquote {
        .cta-button { /* Further adjust button padding if needed */
            padding: 10px 15px;
        }
+
+    /* Stack challenges list on very small screens */
+    @media (max-width: 480px) {
+        .challenges-list {
+            grid-template-columns: 1fr; /* Stack vertically */
+            gap: 30px; /* Vertical gap when stacked */
+        }
+         #what-we-do-section h3 { /* "Common challenges" heading on mobile */
+           font-size: 1.4rem;
+           margin-bottom: 20px;
+         }
+    }
    }
 
 #contact { /* Ensure this section has a white background as per alternating scheme */
@@ -857,7 +1001,7 @@ footer .section-container p { /* Ensure container padding is respected */
 <body>
     <header>
         <div class="container"> <!-- Add a container for max-width control -->
-            <a href="#" class="logo">Odysi Studio</a> <!-- Simple text logo for now -->
+            <a href="#" class="logo">OdySi</a> <!-- Simple text logo for now -->
             <nav>
                 <button class="nav-toggle" aria-label="toggle navigation">
                     <span class="hamburger"></span>
@@ -892,43 +1036,48 @@ footer .section-container p { /* Ensure container padding is respected */
             </div>
         </section>
 
-        <section id="what-we-do-section" class="fade-in-section">
+        <section id="what-we-do-section" class="fade-in-section"> <!-- Ensure background is white -->
             <div class="section-container">
-                <h2>What We Do</h2>
-                <p>We work with post-seed startups, scaleups, and tech-enabled SMEs that have outgrown the early hustle but aren't ready—or don't want—to hire a full internal strategy team.</p>
-                <p>You've built something that works. But now you're facing new challenges: flatlining growth, messy expansion, or an investor story that doesn't quite land. At this stage, clarity, execution, and structure matter more than speed alone.</p>
+                <h2><span class="heading-line heading-line-left"></span><span class="heading-text">WHAT WE DO</span><span class="heading-line heading-line-right"></span></h2>
+                
+                <div class="section-intro"> <!-- Changed from experience-paragraphs -->
+                    <p>We work with post-seed startups, scaleups, and tech-enabled SMEs that have outgrown the early hustle but aren't ready—or don't want—to hire a full internal strategy team.</p>
+                    <p>You've built something that works. But now you're facing new challenges: flatlining growth, messy expansion, or an investor story that doesn't quite land. At this stage, clarity, execution, and structure matter more than speed alone.</p>
+                </div>
             
-            <!-- Optional: Add a divider label here if it fits the design -->
-            <!-- <div class="section-divider-with-label"><span>Challenges We Solve</span></div> -->
-
-            <h3>Common challenges:</h3>
-            <ul class="challenges-list">
-                <li>
-                    <div class="challenge-icon-placeholder"></div>
-                    <span>Growth Bottlenecks – Struggling to scale or expand into new markets</span>
-                </li>
-                <li>
-                    <div class="challenge-icon-placeholder"></div>
-                    <span>Go-to-Market Confusion – No clear plan across teams or markets</span>
-                </li>
-                <li>
-                    <div class="challenge-icon-placeholder"></div>
-                    <span>Weak Investor Narrative – Decks, models, and KPIs don't reflect ambition</span>
-                </li>
-                <li>
-                    <div class="challenge-icon-placeholder"></div>
-                    <span>Product Problems – Products don’t drive growth, updates are slow or buggy</span>
-                </li>
-                <li>
-                    <div class="challenge-icon-placeholder"></div>
-                    <span>No Internal Bandwidth – Founders still own product, sales, and ops</span>
-                </li>
-            </ul>
+                <h3>Common challenges:</h3>
+                <ul class="challenges-list">
+                    <li>
+                        <div class="challenge-icon-placeholder"></div>
+                        <h4 class="challenge-title">GROWTH BOTTLENECKS</h4>
+                        <p class="challenge-description">Struggling to scale or expand into new markets</p>
+                    </li>
+                    <li>
+                        <div class="challenge-icon-placeholder"></div>
+                        <h4 class="challenge-title">GO-TO-MARKET CONFUSION</h4>
+                        <p class="challenge-description">No clear plan across teams or markets</p>
+                    </li>
+                    <li>
+                        <div class="challenge-icon-placeholder"></div>
+                        <h4 class="challenge-title">WEAK INVESTOR NARRATIVE</h4>
+                        <p class="challenge-description">Decks, models, and KPIs don't reflect ambition</p>
+                    </li>
+                    <li>
+                        <div class="challenge-icon-placeholder"></div>
+                        <h4 class="challenge-title">PRODUCT PROBLEMS</h4>
+                        <p class="challenge-description">Products don’t drive growth, updates are slow or buggy</p>
+                    </li>
+                    <li>
+                        <div class="challenge-icon-placeholder"></div>
+                        <h4 class="challenge-title">NO INTERNAL BANDWIDTH</h4>
+                        <p class="challenge-description">Founders still own product, sales, and ops</p>
+                    </li>
+                </ul>
             </div>
         </section>
         <section id="services" class="fade-in-section"> <!-- Keep alternating background color: #f9f9f9 -->
             <div class="section-container">
-                <h2>What We Offer</h2>
+                <h2><span class="heading-line heading-line-left"></span><span class="heading-text">WHAT WE OFFER</span><span class="heading-line heading-line-right"></span></h2>
                 <!-- Optional: Add a divider label here if it fits the design -->
                 <!-- <div class="section-divider-with-label"><span>Our Services</span></div> -->
 
@@ -982,7 +1131,7 @@ footer .section-container p { /* Ensure container padding is respected */
         </section>
         <section id="experience-section" class="fade-in-section"> <!-- Keep alternating background: #ffffff -->
             <div class="section-container">
-                <h2>Our Experience</h2>
+                <h2><span class="heading-line heading-line-left"></span><span class="heading-text">OUR EXPERIENCE</span><span class="heading-line heading-line-right"></span></h2>
                 <div class="experience-paragraphs">
                     <p>We've launched and scaled products at Amazon and Shopify</p>
                     <p>We’ve raised capital and built investor narratives for EU startups</p>
@@ -1008,7 +1157,7 @@ footer .section-container p { /* Ensure container padding is respected */
         </section>
         <section id="team" class="fade-in-section"> <!-- Keep alternating background: #f9f9f9 -->
             <div class="section-container">
-                <h2>Who We Are</h2>
+                <h2><span class="heading-line heading-line-left"></span><span class="heading-text">WHO WE ARE</span><span class="heading-line heading-line-right"></span></h2>
                 <blockquote class="team-quote">
                     "Built by operators, not career consultants."
                 </blockquote>
@@ -1036,7 +1185,7 @@ footer .section-container p { /* Ensure container padding is respected */
         </section>
         <section id="contact" class="fade-in-section"> <!-- Keep alternating background: #ffffff -->
             <div class="section-container">
-                <h2>Contact</h2>
+                <h2><span class="heading-line heading-line-left"></span><span class="heading-text">CONTACT</span><span class="heading-line heading-line-right"></span></h2>
                 <p class="contact-prompt">Tell us what you're trying to solve.</p>
                 
                 <a href="https://calendly.com/odysi-studio/30min" class="cta-button contact-cta">Book a Free Strategy Call</a>
