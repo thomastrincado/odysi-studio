@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odysi Studio – Unlock Your Next Stage of Growth</title>
+    <meta name="description" content="Align your growth, product, and AI strategies with Odysi Studio.">
+    <style>
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* For smooth scrolling */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    margin: 0; /* Ensure no default body margin */
+    padding: 0; /* Ensure no default body padding */
+}
+
+/* Header and Navigation */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0; /* Remove default ul padding */
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active { /* 'active' class can be added by JS later */
+    background-color: #555;
+}
+
+/* Main Content & Sections */
+main {
+    padding-top: 70px; /* Adjust based on header height */
+    width: 100%; /* Ensure main takes full width */
+}
+
+section {
+    padding: 60px 20px; /* Increased padding */
+    min-height: 90vh; 
+    border-bottom: 1px solid #eee;
+    max-width: 1200px; /* Max width for content */
+    margin: 0 auto; /* Center content */
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+/* General Heading Styling */
+h1, h2, h3 {
+    margin-bottom: 20px;
+    color: #333;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.8rem;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px; /* More space below section titles */
+    font-size: 2.5rem;
+}
+
+h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    color: #444;
+}
+
+/* Paragraph and List Styling */
+p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #555;
+}
+
+ul {
+    margin-bottom: 15px;
+    padding-left: 20px; /* Indent list items */
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-left: 5px solid #007bff;
+    background-color: #f9f9f9;
+}
+
+/* CTA Button Styling */
+.cta-button {
+    display: inline-block;
+    background-color: #007bff; /* Example blue */
+    color: #fff !important; /* Ensure text is white, important for overriding link styles */
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 10px; /* Spacing between buttons */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none; /* Remove default border for anchor tags styled as buttons */
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    color: #fff !important; /* Ensure text remains white on hover */
+}
+
+/* Hero Section */
+#hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #f4f4f4; 
+    min-height: 100vh;
+}
+
+#hero-section h1 {
+    font-size: 3.5rem; /* Larger for hero */
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+#hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+.rotating-image-placeholder {
+    width: 250px; 
+    height: 200px; 
+    background-color: #ddd; 
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #555;
+    border: 1px solid #ccc;
+    position: relative; 
+    overflow: hidden; 
+}
+/* Basic rotating animation for placeholder content if needed, actual image rotation would need JS or more complex CSS */
+.rotating-image-placeholder::after {
+    content: "Loading...";
+    animation: rotatePlaceholder 10s linear infinite;
+}
+
+@keyframes rotatePlaceholder {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* "Our Experience" Logo Placeholders */
+#experience-section .logos div { /* Target the div containing logos */
+    text-align: center; /* Center the logos container */
+}
+
+#experience-section .logos div span {
+    display: inline-block;
+    margin: 10px; /* Increased margin */
+    padding: 10px 15px; /* Increased padding */
+    background-color: #e9e9e9;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Specific Section Backgrounds (can be overridden by more specific styles if needed) */
+#what-we-do-section { background-color: #ffffff; }
+#services { background-color: #f9f9f9; }
+#experience-section { background-color: #ffffff; }
+#team { background-color: #f9f9f9; }
+#contact { background-color: #ffffff; }
+
+
+/* Animations */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px); /* Start slightly lower */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+
+/* Tablets and larger */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    #hero-section h1 {
+        font-size: 4rem; /* Even larger on desktop */
+    }
+    #hero-section p {
+        font-size: 1.3rem;
+    }
+    section h2 {
+        font-size: 2.8rem;
+    }
+}
+
+/* Mobile specific adjustments (smaller than 768px) */
+@media (max-width: 767px) {
+    header nav ul {
+        flex-direction: column;
+        align-items: center; /* Center items when stacked */
+        padding-top: 10px; 
+    }
+
+    header nav ul li {
+        margin: 10px 0; /* More vertical margin for stacked items */
+    }
+
+    main {
+        padding-top: 220px; /* Increased padding for taller mobile header (estimate) */
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    #hero-section h1 {
+        font-size: 2.8rem; /* Adjusted for mobile */
+    }
+
+    #hero-section p {
+        font-size: 1rem;
+        padding: 0 10px; /* Add some padding for hero text on mobile */
+    }
+
+    section h2 {
+        font-size: 2rem;
+    }
+    
+    section {
+        padding: 40px 15px; /* Adjust padding for mobile */
+    }
+
+    .cta-button {
+        padding: 10px 20px; /* Slightly smaller buttons on mobile */
+        font-size: 0.9rem;
+        width: 90%; /* Make buttons wider on mobile */
+        text-align: center;
+        margin-right: 0; /* Remove right margin for stacked buttons */
+        margin-bottom: 10px; /* Add bottom margin for stacked buttons */
+    }
+    .cta-button:last-of-type {
+        margin-bottom: 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#what-we-do-section">What We Do</a></li>
+                <li><a href="#services">What We Offer</a></li>
+                <li><a href="#experience-section">Our Experience</a></li>
+                <li><a href="#team">Who We Are</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Placeholder for sections -->
+    <main>
+        <section id="hero-section" class="fade-in-section">
+            <h1>Build.<br>Raise.<br>Grow.</h1>
+            <p>We help startups, scaleups, and tech-enabled SMEs with product innovation, capital raising, and AI implementation, and turn it into growth.</p>
+            <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a Call</a>
+            <div class="rotating-image-placeholder">
+                Rotating Image Placeholder
+            </div>
+        </section>
+
+        <section id="what-we-do-section" class="fade-in-section">
+            <h2>What We Do</h2>
+            <p>We work with post-seed startups, scaleups, and tech-enabled SMEs that have outgrown the early hustle but aren't ready—or don't want—to hire a full internal strategy team.</p>
+            <p>You've built something that works. But now you're facing new challenges: flatlining growth, messy expansion, or an investor story that doesn't quite land. At this stage, clarity, execution, and structure matter more than speed alone.</p>
+            <h3>Common challenges:</h3>
+            <ul>
+                <li>Growth Bottlenecks – Struggling to scale or expand into new markets</li>
+                <li>Go-to-Market Confusion – No clear plan across teams or markets</li>
+                <li>Weak Investor Narrative – Decks, models, and KPIs don't reflect ambition</li>
+                <li>Product Problems – Products don’t drive growth, updates are slow or buggy</li>
+                <li>No Internal Bandwidth – Founders still own product, sales, and ops</li>
+            </ul>
+        </section>
+        <section id="services" class="fade-in-section">
+            <h2>What We Offer</h2>
+            
+            <h3>Go-to-Market & Expansion:</h3>
+            <p>Define ICP, prioritise segments, localise messaging, launch with GTM playbooks</p>
+            
+            <h3>Fundraising Readiness:</h3>
+            <p>Refine pitch, deck, and model. Prepare for demo day. Metrics-driven storytelling</p>
+            
+            <h3>Product & Product Operations:</h3>
+            <p>Define vision, improve delivery, build teams, ship faster with fewer bugs</p>
+            
+            <h3>Growth Engine & Acquisition:</h3>
+            <p>Build growth loops, onboarding flows, outbound systems, and analytics</p>
+            
+            <h3>AI Strategy & Workflow Automation:</h3>
+            <p>Find automation opportunities, prototype copilots, run high-impact pilots</p>
+            
+            <a href="https://form.typeform.com/to/hKyT2ELp" class="cta-button">Take our Survey</a>
+            <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a call</a>
+        </section>
+        <section id="experience-section" class="fade-in-section">
+            <h2>Our Experience</h2>
+            <p>We've launched and scaled products at Amazon and Shopify</p>
+            <p>We’ve raised capital and built investor narratives for EU startups</p>
+            <p>We’ve led market expansion and organisational change from Spain to the UK</p>
+            
+            <h3 class="logos">Logos:</h3>
+            <div>
+                <span>[Placeholder: Binance Logo]</span>
+                <span>[Placeholder: UN Logo]</span>
+                <span>[Placeholder: TravelPerk Logo]</span>
+                <span>[Placeholder: Unilever Logo]</span>
+                <span>[Placeholder: Amazon Logo]</span>
+                <span>[Placeholder: Shopify Logo]</span>
+                <span>[Placeholder: JPMorgan Logo]</span>
+                <span>[Placeholder: Demium Logo]</span>
+                <span>[Placeholder: Glovo Logo]</span>
+            </div>
+        </section>
+        <section id="team" class="fade-in-section">
+            <h2>Who We Are</h2>
+            <blockquote>"Built by operators, not career consultants."</blockquote>
+            
+            <div>
+                <h3>Mike Tucci</h3>
+                <p>Former Amazon and Shopify product leader.</p>
+            </div>
+            
+            <div>
+                <h3>Thomas Trincado</h3>
+                <p>Strategy founder, raised capital, led startups to 8-figure revenue.</p>
+            </div>
+            
+            <div>
+                <h3>Enric Gallofré</h3>
+                <p>Purplecare founder, healthcare ops and service design specialist.</p>
+            </div>
+        </section>
+        <section id="contact" class="fade-in-section">
+            <h2>Contact</h2>
+            <p>Tell us what you're trying to solve.</p>
+            
+            <a href="https://calendly.com/odysi-studio/30min" class="cta-button">Book a Free Strategy Call</a>
+            <p>Email: <a href="mailto:odysi.studio@gmail.com">odysi.studio@gmail.com</a></p>
+        </section>
+    </main>
+
+    <script>
+        // JavaScript will go here
+    </script>
+</body>
+</html>
